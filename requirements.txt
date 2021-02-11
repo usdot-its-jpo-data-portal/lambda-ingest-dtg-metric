@@ -1,0 +1,3 @@
+git+git://github.com/usdot-its-jpo-data-portal/datahub-metrics-ingest@main#egg=datahub_metrics_ingest
+python-dateutil==2.8.1
+requests==2.22.0
