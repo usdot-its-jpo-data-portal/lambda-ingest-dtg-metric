@@ -34,14 +34,32 @@ Option 1: Build package locally and deploy to lambda manually through AWS consol
 sh package.sh
 ```
 
+Option 2: Install requirements in local virtual environment for running as a script locally.
+```
+virtualenv --python=python3 temp_env/
+source temp_env/bin/activate
+pip install -r requirements.txt
+```
+
 ## Testing
 
 To be added
 
 ## Execution
-Run the script:
+
+Option 1: Execute via AWS Lambda
+
+Option 2: Execute locally as a script.
 ```
-python src/lambda_function.py
+python src/lambda_function.py --help
+
+usage: lambda_function.py [-h] [--ingest_historical] [--write_to_es] [--es_host ES_HOST]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --ingest_historical  Ingest all daily DTG metrics from 2017-11-01 until yesterday. Otherwise, will ingest only metrics for yesterday.
+  --write_to_es        Write metrics Elasticsearch. Otherwise, will write metrics to CSV.
+  --es_host ES_HOST    Elasticsearch host to write the metrics to. Default: http://localhost.
 ```
 
 # Version History and Retention
