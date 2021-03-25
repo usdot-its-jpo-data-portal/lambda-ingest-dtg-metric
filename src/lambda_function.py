@@ -93,9 +93,9 @@ if (__name__ == '__main__'):
         sdate = edate - timedelta(hours=24)
     
     socrata_auth = SOCRATA_AUTH if not args.socrata_auth else tuple(args.socrata_auth.split(','))
-    metric_objs = ingest(sdate, edate, source_name='dtg', write_to_es=args.write_to_es, elasticsearch_host=args.es_host, socrata_auth=socrata_auth)
-    metric_objs = ingest(sdate, edate, source_name='scgc', write_to_es=args.write_to_es, elasticsearch_host=args.es_host, socrata_auth=socrata_auth)
+    metric_objs_dtg = ingest(sdate, edate, source_name='dtg', write_to_es=args.write_to_es, elasticsearch_host=args.es_host, socrata_auth=socrata_auth)
+    metric_objs_scgc = ingest(sdate, edate, source_name='scgc', write_to_es=args.write_to_es, elasticsearch_host=args.es_host, socrata_auth=socrata_auth)
     if not args.write_to_es:
         fp = f"socrata_metrics_{sdate.strftime('%Y-%m-%d')}.csv"
-        write_metrics_to_csv(fp, metric_objs)
-        print(f'Wrote {len(metric_objs)} records to {fp}')
+        write_metrics_to_csv(fp, metric_objs_dtg+metric_objs_scgc)
+        print(f'Wrote {len(metric_objs_dtg)} dtg and {len(metric_objs_scgc)} scgc records to {fp}')
