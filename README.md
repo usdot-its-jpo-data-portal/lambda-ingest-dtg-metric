@@ -21,6 +21,8 @@ This repository contains a lambda function for ingesting usage metrics relating 
 
 For more information on the Socrata metrics, please see Socrata's support articles for [Socrata Site Analytics](https://support.socrata.com/hc/en-us/articles/360045612793-Socrata-Site-Analytics) and [Site Analytics: Asset Access](https://support.socrata.com/hc/en-us/articles/360051223314).
 
+For more information on the Elasticsearch Index for ITS DataHub's metrics, see [datahub-search](https://github.com/usdot-its-jpo-data-portal/datahub-search/) GitHub repository.
+
 # Prerequisites
 
 Requires:
