@@ -29,7 +29,7 @@ Requires:
 
 # Usage
 
-## Building
+## Building and Deploying
  
 Option 1: Build package locally and deploy to lambda manually through AWS console.
 ```
@@ -42,12 +42,18 @@ virtualenv --python=python3 temp_env/
 source temp_env/bin/activate
 pip install -r requirements.txt
 ```
-If running locally, make sure to set your Socrata username/password in environment variable as follows:
-`export SOCRATA_COMMA_DELIM_AUTH=yourUserName,yourPassword`
 
-## Testing
+For both options, make sure to set the following environment variables:
 
-To be added
+- `SOCRATA_COMMA_DELIM_AUTH`: Required. Socrata username followed by Socrata password, comma delimited. Example: `someUsername,somePassword`
+- `ELASTICSEARCH_API_BASE_URL`: Required if writing to Elasticsearch. The Base URL to your Elasticsearch instance. Example: `https://my.elasticsearch-db.com`
+
+If running locally, you can run the following command to set environment variable:
+
+```
+export SOCRATA_COMMA_DELIM_AUTH=someUsername,somePassword
+export ELASTICSEARCH_API_BASE_URL=https://my.elasticsearch-db.com
+```
 
 ## Execution
 
