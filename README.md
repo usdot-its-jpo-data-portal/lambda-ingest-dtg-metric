@@ -17,7 +17,11 @@ This repository contains a lambda function for ingesting usage metrics relating 
 
 # Project Description
 
-This repository contains a lambda function for ingesting usage metrics relating to ITS DataHub's assets on data.transportation.gov. The metrics are ingested into ITS DataHub's Elasticsearch database for display on ITS DataHub.
+This repository contains a lambda function for ingesting usage metrics relating to ITS DataHub's assets on data.transportation.gov and datahub.transportation.gov. The metrics are ingested into ITS DataHub's Elasticsearch database for display on ITS DataHub.
+
+For more information on the Socrata metrics, please see Socrata's support articles for [Socrata Site Analytics](https://support.socrata.com/hc/en-us/articles/360045612793-Socrata-Site-Analytics) and [Site Analytics: Asset Access](https://support.socrata.com/hc/en-us/articles/360051223314).
+
+For more information on the Elasticsearch Index for ITS DataHub's metrics, see [datahub-search](https://github.com/usdot-its-jpo-data-portal/datahub-search/) GitHub repository.
 
 # Prerequisites
 
@@ -27,7 +31,7 @@ Requires:
 
 # Usage
 
-## Building
+## Building and Deploying
  
 Option 1: Build package locally and deploy to lambda manually through AWS console.
 ```
@@ -41,9 +45,17 @@ source temp_env/bin/activate
 pip install -r requirements.txt
 ```
 
-## Testing
+For both options, make sure to set the following environment variables:
 
-To be added
+- `SOCRATA_COMMA_DELIM_AUTH`: Required. Socrata username followed by Socrata password, comma delimited. Example: `someUsername,somePassword`
+- `ELASTICSEARCH_API_BASE_URL`: Required if writing to Elasticsearch. The Base URL to your Elasticsearch instance. Example: `https://my.elasticsearch-db.com`
+
+If running locally, you can run the following command to set environment variable:
+
+```
+export SOCRATA_COMMA_DELIM_AUTH=someUsername,somePassword
+export ELASTICSEARCH_API_BASE_URL=https://my.elasticsearch-db.com
+```
 
 ## Execution
 
