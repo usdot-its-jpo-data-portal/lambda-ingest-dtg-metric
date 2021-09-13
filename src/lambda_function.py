@@ -10,7 +10,6 @@ from datahub_metrics_ingest.ElasticsearchDAO import ElasticsearchDAO
 from datahub_metrics_ingest.util import write_metrics_to_csv
 
 
-USER_ID = '9k5r-tgy7'
 ELASTICSEARCH_API_BASE_URL = os.environ.get('ELASTICSEARCH_API_BASE_URL')\
     if os.environ.get('ELASTICSEARCH_API_BASE_URL') is not None else 'http://localhost'
 LIMIT_N = 50000
@@ -53,10 +52,19 @@ def ingest(sdate: datetime, edate: datetime, source_name: str = 'scgc', write_to
         raise
 
 def get_data_asset_ids():
-    r = requests.get('http://api.us.socrata.com/api/catalog/v1', params={'for_user': USER_ID})
+    r = requests.get('http://api.us.socrata.com/api/catalog/v1',
+                params={
+                    'tags': "its joint program office (jpo)", 
+                    'search_context': 'data.transportation.gov',
+                    'provenance': 'official',
+                    'visibility': 'open'
+                })
     catalog = r.json()['results']
     asset_ids = [i['resource']['id'] for i in catalog]
-    return asset_ids
+    hidden_asset_ids = ['hchs-a7s6', '9k4m-a3jc']
+    ids = list(set(asset_ids + hidden_asset_ids))
+    print(f'Retrieved {len(ids)} asset ids')
+    return ids
 
 def get_metrics(sdate: datetime, edate: datetime, offset: int = 0, source_name: str = "scgc", socrata_auth=SOCRATA_AUTH):
     where_clause = f"timestamp >= '{sdate.strftime('%Y-%m-%d')}T00:00:00.000' AND timestamp < '{edate.strftime('%Y-%m-%d')}T00:00:00.000'"
