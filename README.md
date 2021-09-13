@@ -17,7 +17,9 @@ This repository contains a lambda function for ingesting usage metrics relating 
 
 # Project Description
 
-This repository contains a lambda function for ingesting usage metrics relating to ITS DataHub's assets on data.transportation.gov. The metrics are ingested into ITS DataHub's Elasticsearch database for display on ITS DataHub.
+This repository contains a lambda function for ingesting usage metrics relating to ITS DataHub's assets on data.transportation.gov and datahub.transportation.gov. The metrics are ingested into ITS DataHub's Elasticsearch database for display on ITS DataHub.
+
+For more information on the Socrata metrics, please see Socrata's support articles for [Socrata Site Analytics](https://support.socrata.com/hc/en-us/articles/360045612793-Socrata-Site-Analytics) and [Site Analytics: Asset Access](https://support.socrata.com/hc/en-us/articles/360051223314).
 
 # Prerequisites
 
@@ -40,6 +42,8 @@ virtualenv --python=python3 temp_env/
 source temp_env/bin/activate
 pip install -r requirements.txt
 ```
+If running locally, make sure to set your Socrata username/password in environment variable as follows:
+`export SOCRATA_COMMA_DELIM_AUTH=yourUserName,yourPassword`
 
 ## Testing
 
